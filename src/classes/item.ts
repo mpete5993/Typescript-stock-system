@@ -31,7 +31,7 @@ export const ItemController = (() => {
       },
       //add items
       addItem: (name: string, price: number, qty: number) => {
-        let ID;
+        let ID:number;
         //generate ID for items
         if (data.items.length > 0) {
           ID = data.items[data.items.length - 1].id + 1;

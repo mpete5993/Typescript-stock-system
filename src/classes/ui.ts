@@ -280,7 +280,7 @@ export const UIController = (() => {
       document.querySelector<HTMLElement>(UISelectors.addItemsContainer)!.style.display = 'block';
       document.querySelector<HTMLElement>(UISelectors.itemList)!.style.display = 'none';
 
-      document.querySelector<HTMLSpanElement>('#show-item-name')!.textContent = ..getCurrentItem().name;
+      document.querySelector<HTMLSpanElement>('#show-item-name')!.textContent = ItemController.getCurrentItem().name;
       document.querySelector<HTMLSpanElement>('#show-item-price')!.textContent = ItemController.getCurrentItem().price;
       document.querySelector<HTMLSpanElement>('#show-item-qty')!.textContent = ItemController.getCurrentItem().qty;
     },
