@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "name": "typescript-stock-system",
+  "description": "Stock system",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpete5993/Typescript-stock-system.git"
+  },
+  "author": "Mpete Bataung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mpete5993/Typescript-stock-system/issues"
+  },
+  "homepage": "https://github.com/mpete5993/Typescript-stock-system#readme"
+}

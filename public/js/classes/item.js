@@ -16,8 +16,7 @@ export const ItemController = (() => {
         //   { id: 2, name: 'Product 3', price: 13570, qty: 10},
         // ],
         items: StorageController.getItemsFromStorage(),
-        currentItem: null,
-        averagePrice: 0
+        currentItem: null, //for updating an item
     };
     //give access to data
     return {
@@ -36,7 +35,7 @@ export const ItemController = (() => {
                 ID = 0;
             }
             //create new Item
-            newItem = new Item(ID, name, price, qty);
+            const newItem = new Item(ID, name, price, qty);
             //add to items array
             data.items.push(newItem);
             return newItem;
@@ -46,7 +45,7 @@ export const ItemController = (() => {
             qty = parseInt(qty);
             //find item
             let found = null;
-            data.items.forEach(function (item) {
+            data.items.forEach((item) => {
                 if (item.id === data.currentItem.id) {
                     let numOfItems = parseInt(item.qty);
                     item.qty = numOfItems + qty;

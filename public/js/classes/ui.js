@@ -1,3 +1,4 @@
+import { ItemController } from "../classes/item.js";
 /* ======= UI controller ========== */
 export const UIController = (() => {
     const UISelectors = {
@@ -21,7 +22,7 @@ export const UIController = (() => {
         errorMsg: '#buy-item-msg',
         warningMsg: '#add-item-msg',
         addItemsMessage: '.add-items-message',
-        showAveragePrice: '.average-price'
+        showAveragePrice: '.average-price',
     };
     //public methods
     return {
@@ -64,8 +65,8 @@ export const UIController = (() => {
         getItemInput: () => {
             return {
                 name: document.querySelector(UISelectors.itemNameInput).value,
-                price: document.querySelector(UISelectors.itemPriceInput).value,
-                qty: document.querySelector(UISelectors.itemQtyInput).value,
+                price: document.querySelector(UISelectors.itemPriceInput).valueAsNumber,
+                qty: document.querySelector(UISelectors.itemQtyInput).valueAsNumber,
             };
         },
         getNumOfItems: () => {
@@ -95,6 +96,17 @@ export const UIController = (() => {
             }, 3000);
         },
         addStockWarning: () => {
+            let errorMsg = document.querySelector(UISelectors.warningMsg);
+            errorMsg.innerHTML = `
+      <div class="alert alert-warning">
+         Please fill all the fields<i class="fa fa-exclamation-triangle pull-right" aria-hidden="true"></i>
+      </div>`;
+            //hide alert after 3 sec
+            setTimeout(function () {
+                document.querySelector('.alert').remove();
+            }, 3000);
+        },
+        buyItemsWarning: () => {
             let errorMsg = document.querySelector(UISelectors.warningMsg);
             errorMsg.innerHTML = `
       <div class="alert alert-warning">

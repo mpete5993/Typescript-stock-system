@@ -1,4 +1,4 @@
-import { ItemController } from "./item";
+import { ItemController } from "../classes/item.js";
 
 /* ======= UI controller ========== */
 export const UIController = (() => {
@@ -77,12 +77,12 @@ export const UIController = (() => {
     },
     getNumOfItems: () => {
       return {
-        qty: document.querySelector<HTMLInputElement>(UISelectors.editQtyInput)!.valueAsNumber
+        qty: document.querySelector<HTMLInputElement>(UISelectors.editQtyInput)!.value
       }
     },
     getUserItems: () => {
       return {
-        qty: document.querySelector<HTMLInputElement>(UISelectors.buyItemQtyInput)!.valueAsNumber,
+        qty: document.querySelector<HTMLInputElement>(UISelectors.buyItemQtyInput)!.value,
       }
     },
     clearUserEmail: () => {
@@ -219,12 +219,12 @@ export const UIController = (() => {
       document.querySelector(UISelectors.itemList)!.insertAdjacentElement('beforeend', productContainer);
     },
     updateListItem: (item:any) => {
-      let listItems = document.querySelectorAll(UISelectors.listItems);
+      let listItems:any = document.querySelectorAll(UISelectors.listItems);
 
       //turn node list in array
       listItems = Array.from(listItems);
 
-      listItems.forEach((listItem) => {
+      listItems.forEach((listItem: { getAttribute: (arg0: string) => any; }) => {
         const itemID = listItem.getAttribute('id');
 
         if (itemID === `item-${item.id}`) {
@@ -280,16 +280,18 @@ export const UIController = (() => {
       document.querySelector<HTMLElement>(UISelectors.addItemsContainer)!.style.display = 'block';
       document.querySelector<HTMLElement>(UISelectors.itemList)!.style.display = 'none';
 
+      //@ts-ignore
       document.querySelector<HTMLSpanElement>('#show-item-name')!.textContent = ItemController.getCurrentItem().name;
-      document.querySelector<HTMLSpanElement>('#show-item-price')!.textContent = ItemController.getCurrentItem().price;
-      document.querySelector<HTMLSpanElement>('#show-item-qty')!.textContent = ItemController.getCurrentItem().qty;
+      //@ts-ignore
+      document.querySelector<HTMLSpanElement>('#show-item-price')!.textContent = ItemController.getCurrentItem().price;//@ts-ignore
+      document.querySelector<HTMLSpanElement>('#show-item-qty')!.textContent = ItemController.getCurrentItem().qty;//@ts-ignore
     },
     buyItemToForm: () => {
       document.querySelector<HTMLElement>(UISelectors.buyItemsContainer)!.style.display = 'block';
       document.querySelector<HTMLElement>(UISelectors.itemList)!.style.display = 'none';
-
-      document.querySelector<HTMLSpanElement>('#show-product-name')!.textContent = ItemController.getCurrentItem()!.name;
-      document.querySelector<HTMLSpanElement>('#show-price')!.textContent = ItemController.getCurrentItem().price;
+      //@ts-ignore
+      document.querySelector<HTMLSpanElement>('#show-product-name')!.textContent = ItemController.getCurrentItem().name;//@ts-ignore
+      document.querySelector<HTMLSpanElement>('#show-price')!.textContent = ItemController.getCurrentItem().price;//@ts-ignore
       document.querySelector<HTMLSpanElement>('#show-qty')!.textContent = ItemController.getCurrentItem().qty;
     },
     clearEditState: () => {

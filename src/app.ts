@@ -11,11 +11,13 @@ const AppController = ((ItemController, StorageController, UIController) => {
     //get Ui selectors
     const UISelectors = UIController.getSelectors();
 
-    //add item event
-    document.querySelector(UISelectors.addBtn)!.addEventListener('click', itemAddSubmit) ;
+    //add products event
+    document.querySelector(UISelectors.addBtn)!.addEventListener('click', productAddSubmit) ;
 
     //add & buy items events
+    // @ts-ignore 
     document.querySelector(UISelectors.itemList)!.addEventListener('click', setToaddItems);
+    // @ts-ignore 
     document.querySelector(UISelectors.itemList)!.addEventListener('click', setToBuyItems);
     document.querySelector(UISelectors.updateItemsBtn)!.addEventListener('click', addMoreItemsSubmit);
     document.querySelector(UISelectors.buyBtn)!.addEventListener('click', buyItemsSubmit);
@@ -24,13 +26,16 @@ const AppController = ((ItemController, StorageController, UIController) => {
     document.querySelector(UISelectors.backBtn)!.addEventListener('click', hideAddStock);
     document.querySelector(UISelectors.backToList)!.addEventListener('click', hideBuyStock);
 
+    //load emails from the DOM
+    // document.querySelector().addEventListener('DOM');
   }
-  //add item submit
-  const itemAddSubmit = (e: Event) => {
+  //add products submit
+  const productAddSubmit = (e: Event) => {
 
     //get form input from UI controller
     const input = UIController.getItemInput();
 
+    // @ts-ignore
     //check for input 
     if (input.name !== '' && input.price !== '' && input.qty !== '') {
       //add items
@@ -58,14 +63,12 @@ const AppController = ((ItemController, StorageController, UIController) => {
     //get input from ui
     const input = UIController.getNumOfItems();
 
-
-    if (input.qty != '') {
+      if (input.qty != '') {
       //update item
-      const updatedItem = ItemController.updateItem(input.qty);
+      const updatedItem:any = ItemController.updateItem(input.qty);
 
       //update ui
       UIController.updateListItem(updatedItem);
-
 
       //add more items to existing product in LS
       StorageController.updateItemStorage(updatedItem);
@@ -91,14 +94,13 @@ const AppController = ((ItemController, StorageController, UIController) => {
     const input = UIController.getUserItems();
     //get user email
     const userEmail = document.querySelector(UISelectors.userEmailInput) as HTMLInputElement;
-    const qtyInput = document.querySelector(UISelectors.buyItemQtyInput) as HTMLInputElement;;
-    let email:string[] = JSON.parse(localStorage.getItem('emails'));
+    const qtyInput = document.querySelector(UISelectors.buyItemQtyInput) as HTMLInputElement;
 
 
     if (userEmail.value != '' && qtyInput.value != '') {
         const email = StorageController.storeUserEmailToStorage(userEmail.value);
         //update item
-        const updatedItem = ItemController.buyItem(input.qty);
+        const updatedItem:any = ItemController.buyItem(input.qty);
         //update ui
         UIController.updateListItem(updatedItem);
 
@@ -119,7 +121,7 @@ const AppController = ((ItemController, StorageController, UIController) => {
   }
 
   //add items click event
-  const setToaddItems = (e: Event) => {
+  const setToaddItems = (e: EventTarget) => {
 
     if (e.target.classList.contains('add-item')) {
       //get List Items ID
@@ -144,7 +146,7 @@ const AppController = ((ItemController, StorageController, UIController) => {
   }
 
   //buy items click event
-  const setToBuyItems = (e:Event) => {
+  const setToBuyItems = (e:EventTarget) => {
 
     if (e.target.classList.contains('remove-item')!) {
       //get List Items ID
@@ -168,12 +170,12 @@ const AppController = ((ItemController, StorageController, UIController) => {
     e.preventDefault();
   }
 
-  //hide add content
+  //hide add stock content
   const hideAddStock = (e: Event) => {
     UIController.hideAddStockContent();
     e.preventDefault();
   }
-  //hide add content
+  //hide buy stock content
   const hideBuyStock = (e: Event) => {
     UIController.hideBuyStockContent();
     e.preventDefault();

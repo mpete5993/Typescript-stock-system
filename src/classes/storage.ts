@@ -14,7 +14,7 @@ export const StorageController = (() => {
           localStorage.setItem('products', JSON.stringify(items));
         } else {
           //get what is already in LS
-          items = JSON.parse(localStorage.getItem('products'));
+          items = JSON.parse(localStorage.getItem('products') || '{}');
           //push new item
           items.push(item);
           //Re set LS
@@ -27,12 +27,12 @@ export const StorageController = (() => {
         if (localStorage.getItem('products') == null) {
           items = [];
         } else {
-          items = JSON.parse(localStorage.getItem('products'));
+          items = JSON.parse(localStorage.getItem('products')|| '{}');
         }
         return items;
       },
       updateItemStorage: (updatedItem: { id: number, }) => {
-        let items = JSON.parse(localStorage.getItem('products'));
+        let items = JSON.parse(localStorage.getItem('products') || '{}');
   
         items.forEach((item: { id: number; }, index: number) => {
           if (updatedItem.id === item.id) {
@@ -53,12 +53,12 @@ export const StorageController = (() => {
           localStorage.setItem('emails', JSON.stringify(emails));
         }
         else {
-          emails = JSON.parse(localStorage.getItem('emails'));
+          emails = JSON.parse(localStorage.getItem('emails')|| '{}');
           //push new item
           emails.push(email);
   
           //set items in localStorage
-          localStorage.setItem('emails', JSON.stringify(emails));
+          localStorage.setItem('emails', JSON.stringify(emails) || '{}' );
         }
       },
       //fetch email list from localStorage 
@@ -69,7 +69,7 @@ export const StorageController = (() => {
           emails = [];
         }
         else {
-          emails = JSON.parse(localStorage.getItem('emails'));
+          emails = JSON.parse(localStorage.getItem('emails') || '{}');
         }
         emails.forEach((email: string) => {
           //get the ul
